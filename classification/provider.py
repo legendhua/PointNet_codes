@@ -29,6 +29,18 @@ def shuffle_data(data, labels):
     np.random.shuffle(idx)
     return data[idx, ...], labels[idx], idx
 
+def shuffle_data_with_seg(data, labels, seg):
+    """ Shuffle data and labels.
+        Input:
+          data: B,N,... numpy array
+          label: B,... numpy array
+        Return:
+          shuffled data, label and shuffle indices
+    """
+    idx = np.arange(len(labels))
+    np.random.shuffle(idx)
+    return data[idx, :, :], labels[idx], seg[idx,:]
+
 
 def rotate_point_cloud(batch_data):
     """ Randomly rotate the point clouds to augument the dataset
@@ -39,7 +51,7 @@ def rotate_point_cloud(batch_data):
           BxNx3 array, rotated batch of point clouds
     """
     rotated_data = np.zeros(batch_data.shape, dtype=np.float32)
-    for k in range(batch_data.shape[0]):
+    for k in xrange(batch_data.shape[0]):
         rotation_angle = np.random.uniform() * 2 * np.pi
         cosval = np.cos(rotation_angle)
         sinval = np.sin(rotation_angle)
@@ -59,7 +71,7 @@ def rotate_point_cloud_by_angle(batch_data, rotation_angle):
           BxNx3 array, rotated batch of point clouds
     """
     rotated_data = np.zeros(batch_data.shape, dtype=np.float32)
-    for k in range(batch_data.shape[0]):
+    for k in xrange(batch_data.shape[0]):
         #rotation_angle = np.random.uniform() * 2 * np.pi
         cosval = np.cos(rotation_angle)
         sinval = np.sin(rotation_angle)
