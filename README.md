@@ -1,0 +1,4 @@
+# PointNet_codes
+PointNet实验过程中的代码记录
+
+此部分代码包括进行PointNet实验及网络分析过程中记录的一些代码，包括classification和part segmentation
